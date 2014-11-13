@@ -86,6 +86,12 @@ public class DialerSettingsActivity extends AppCompatPreferenceActivity {
         TelephonyManager telephonyManager =
                 (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
 
+        final Header lookupSettingsHeader = new Header();
+        lookupSettingsHeader.titleRes = R.string.lookup_settings_label;
+        lookupSettingsHeader.summaryRes = R.string.lookup_settings_description;
+        lookupSettingsHeader.fragment = LookupSettingsFragment.class.getName();
+        target.add(lookupSettingsHeader);
+
         // "Call Settings" (full settings) is shown if the current user is primary user and there
         // is only one SIM. Before N, "Calling accounts" setting is shown if the current user is
         // primary user and there are multiple SIMs. In N+, "Calling accounts" is shown whenever

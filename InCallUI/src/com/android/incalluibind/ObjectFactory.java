@@ -23,12 +23,12 @@ import com.android.incallui.CallCardPresenter.EmergencyCallListener;
 import com.android.incallui.ContactUtils;
 import com.android.incallui.DistanceHelper;
 import com.android.incallui.service.PhoneNumberService;
+import com.android.dialer.lookup.ReverseLookupService;
 
 public class ObjectFactory {
 
     public static PhoneNumberService newPhoneNumberService(Context context) {
-        // no phone number service.
-        return null;
+        return new ReverseLookupService(context);
     }
 
     public static EmergencyCallListener newEmergencyCallListener() {

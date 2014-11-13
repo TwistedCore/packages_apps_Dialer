@@ -33,6 +33,7 @@ import com.android.incallui.Call.LogState;
 import com.android.dialer.R;
 import com.android.dialer.logging.Logger;
 import com.android.dialer.logging.ScreenEvent;
+import com.android.dialer.lookup.LookupCache;
 import com.android.dialer.service.CachedNumberLookupService;
 import com.android.dialer.widget.EmptyContentView;
 import com.android.dialer.widget.EmptyContentView.OnEmptyViewActionButtonClickedListener;
@@ -80,12 +81,14 @@ public class RegularSearchFragment extends SearchFragment
 
     @Override
     protected void cacheContactInfo(int position) {
-        if (mCachedNumberLookupService != null) {
-            final RegularSearchListAdapter adapter =
+        final RegularSearchListAdapter adapter =
                 (RegularSearchListAdapter) getAdapter();
+        if (mCachedNumberLookupService != null) {
             mCachedNumberLookupService.addContact(getContext(),
                     adapter.getContactInfo(mCachedNumberLookupService, position));
         }
+        LookupCache.cacheContact(getActivity(),
+                adapter.getLookupContactInfo(position));
     }
 
     @Override
