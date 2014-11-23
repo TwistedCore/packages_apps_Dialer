@@ -366,6 +366,7 @@ public class Call {
     private int mState = State.INVALID;
     private DisconnectCause mDisconnectCause;
     private int mSessionModificationState;
+    private boolean mIsOutgoing = false;
     private final List<String> mChildCallIds = new ArrayList<>();
     private final VideoSettings mVideoSettings = new VideoSettings();
     private int mVideoState;
@@ -659,12 +660,19 @@ public class Call {
 
     public void setState(int state) {
         mState = state;
+        if (state == State.DIALING || state == State.CONNECTING) {
+            mIsOutgoing = true;
+        }
         if (mState == State.INCOMING) {
             mLogState.isIncoming = true;
         } else if (mState == State.DISCONNECTED) {
             mLogState.duration = getConnectTimeMillis() == 0 ?
                     0: System.currentTimeMillis() - getConnectTimeMillis();
         }
+    }
+
+    public boolean isOutgoing() {
+        return mIsOutgoing;
     }
 
     public int getNumberPresentation() {
