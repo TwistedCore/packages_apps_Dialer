@@ -16,6 +16,9 @@
 
 package com.android.dialer.calllog;
 
+import android.animation.Animator;
+import android.animation.Animator.AnimatorListener;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -33,6 +36,7 @@ import android.text.TextUtils;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -607,18 +611,61 @@ public final class CallLogListItemViewHolder extends RecyclerView.ViewHolder
         if (show) {
             // Inflate the view stub if necessary, and wire up the event handlers.
             inflateActionViewStub();
-
-            actionsView.setVisibility(View.VISIBLE);
+            expandShowActions();
             actionsView.setAlpha(1.0f);
         } else {
             // When recycling a view, it is possible the actionsView ViewStub was previously
             // inflated so we should hide it in this case.
             if (actionsView != null) {
-                actionsView.setVisibility(View.GONE);
+                collapseShowActions();
             }
         }
 
         updatePrimaryActionButton(show);
+    }
+
+    private void expandShowActions() {
+         //set Visible
+         actionsView.setVisibility(View.VISIBLE);
+         final int widthSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+         final int heightSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+         actionsView.measure(widthSpec, heightSpec);
+         ValueAnimator mAnimator = slideAnimator(0, actionsView.getMeasuredHeight());
+         mAnimator.start();
+    }
+
+    private void collapseShowActions() {
+         int finalHeight = actionsView.getHeight();
+         ValueAnimator mAnimator = slideAnimator(finalHeight, 0);
+         mAnimator.addListener(new Animator.AnimatorListener() {
+              @Override
+              public void onAnimationRepeat(Animator animation) { }
+              @Override
+              public void onAnimationCancel(Animator animation) { }
+              @Override
+              public void onAnimationStart(Animator animation) { }
+              @Override
+              public void onAnimationEnd(Animator animator) {
+                  //Height=0, but it set visibility to GONE
+                  actionsView.setVisibility(View.GONE);
+              }
+         });
+         mAnimator.start();
+    }
+
+    private ValueAnimator slideAnimator(int start, int end) {
+        ValueAnimator animator = ValueAnimator.ofInt(start, end);
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+             @Override
+             public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                //Update Height
+                int value = (Integer) valueAnimator.getAnimatedValue();
+                ViewGroup.LayoutParams layoutParams = actionsView.getLayoutParams();
+                layoutParams.height = value;
+                actionsView.setLayoutParams(layoutParams);
+             }
+        });
+        return animator;
     }
 
     public void showOrHideVoicemailTranscriptionView(boolean isExpanded) {
