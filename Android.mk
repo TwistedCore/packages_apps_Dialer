@@ -48,8 +48,6 @@ LOCAL_AAPT_FLAGS := \
     --extra-packages com.android.contacts.common \
     --extra-packages com.android.phone.common
 
-LOCAL_JAVA_LIBRARIES := org.apache.http.legacy
-
 LOCAL_STATIC_JAVA_LIBRARIES := \
     android-common \
     android-support-v13 \
