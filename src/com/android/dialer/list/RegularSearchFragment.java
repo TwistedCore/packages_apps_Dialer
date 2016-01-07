@@ -15,6 +15,7 @@
  */
 package com.android.dialer.list;
 
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.READ_CONTACTS;
 
 import android.app.Activity;
@@ -68,8 +69,11 @@ public class RegularSearchFragment extends SearchFragment
 
         if (LookupSettings.isForwardLookupEnabled(getActivity())
                 || LookupSettings.isPeopleLookupEnabled(getActivity())) {
-            requestPermissions(new String[] {ACCESS_FINE_LOCATION},
-                    ACCESS_FINE_LOCATION_PERMISSION_REQUEST_CODE);
+            if (getActivity().checkSelfPermission(ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[]{ACCESS_FINE_LOCATION},
+                        ACCESS_FINE_LOCATION_PERMISSION_REQUEST_CODE);
+            }
         }
     }
 
