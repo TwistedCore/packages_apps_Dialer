@@ -28,4 +28,6 @@
     <color name="dialer_button_text_color">#fff</color>
     <color name="dialpad_text_color">#FFFFFF</color>
     <color name="keyguard_preview_bg">#ffffff</color>
-</resources> 
+    <color name="promo_card_header_text_color">@color/background_dialer_white</color>
+    <color name="promo_card_details_text_color">@color/background_dialer_white</color>
+</resources>
