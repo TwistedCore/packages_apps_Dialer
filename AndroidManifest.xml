@@ -364,11 +364,6 @@
             android:multiprocess="false"
             />
 
-        <provider android:name="com.android.dialer.lookup.LookupProvider"
-                  android:authorities="com.android.dialer.provider"
-                  android:exported="false"
-                  android:multiprocess="false" />
-
         <activity android:name=".SpeedDialListActivity"
             android:theme="@style/SpeedDialtactsTheme"
             android:label="@string/speed_dial_settings" >
