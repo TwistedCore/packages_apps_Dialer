@@ -18,9 +18,6 @@ package com.android.dialer.settings;
 
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.ListPreference;
@@ -70,8 +67,6 @@ public class LookupSettingsFragment extends PreferenceFragment
         mForwardLookupProvider.setOnPreferenceChangeListener(this);
         mPeopleLookupProvider.setOnPreferenceChangeListener(this);
         mReverseLookupProvider.setOnPreferenceChangeListener(this);
-
-        updateReverseLookupProviderList();
     }
 
     @Override
@@ -107,33 +102,6 @@ public class LookupSettingsFragment extends PreferenceFragment
         }
 
         return true;
-    }
-
-    private void updateReverseLookupProviderList() {
-        Resources res = getResources();
-
-        String[] entries = res.getStringArray(R.array.reverse_lookup_provider_names);
-        String[] values = res.getStringArray(R.array.reverse_lookup_providers);
-
-        if (isPackageInstalled(getString(R.string.cyngn_reverse_lookup_provider_package))) {
-            entries = Arrays.copyOf(entries, entries.length + 1);
-            values = Arrays.copyOf(values, values.length + 1);
-
-            entries[entries.length - 1] = getString(R.string.cyngn_reverse_lookup_provider_name);
-            values[values.length - 1] = getString(R.string.cyngn_reverse_lookup_provider_value);
-        }
-
-        mReverseLookupProvider.setEntries(entries);
-        mReverseLookupProvider.setEntryValues(values);
-    }
-
-    private boolean isPackageInstalled(String pkg) {
-        try {
-            PackageInfo pi = getActivity().getPackageManager().getPackageInfo(pkg, 0);
-            return pi.applicationInfo.enabled;
-        } catch (PackageManager.NameNotFoundException e) {
-            return false;
-        }
     }
 
     private void restoreLookupProviderSwitches() {

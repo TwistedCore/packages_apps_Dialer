@@ -33,18 +33,12 @@ public final class LookupSettings {
     public static final String FLP_DEFAULT = FLP_GOOGLE;
 
     /** People lookup providers */
-    public static final String PLP_WHITEPAGES = "WhitePages";
     public static final String PLP_AUSKUNFT = "Auskunft";
-    public static final String PLP_DEFAULT = PLP_WHITEPAGES;
+    public static final String PLP_DEFAULT = PLP_AUSKUNFT;
 
     /** Reverse lookup providers */
     public static final String RLP_OPENCNAM = "OpenCnam";
-    public static final String RLP_WHITEPAGES = "WhitePages";
-    public static final String RLP_WHITEPAGES_CA = "WhitePages_CA";
-    public static final String RLP_YELLOWPAGES = "YellowPages";
-    public static final String RLP_YELLOWPAGES_CA = "YellowPages_CA";
     public static final String RLP_ZABASEARCH = "ZabaSearch";
-    public static final String RLP_CYNGN_CHINESE = "CyngnChinese";
     public static final String RLP_DASTELEFONBUCH = "DasTelefonbuch";
     public static final String RLP_GEBELD = "Gebeld";
     public static final String RLP_AUSKUNFT = "Auskunft";
@@ -60,7 +54,7 @@ public final class LookupSettings {
 
     public static boolean isPeopleLookupEnabled(Context context) {
         return Settings.System.getInt(context.getContentResolver(),
-                Settings.System.ENABLE_PEOPLE_LOOKUP, 1) != 0;
+                Settings.System.ENABLE_PEOPLE_LOOKUP, 0) != 0;
     }
 
     public static boolean isReverseLookupEnabled(Context context) {
