@@ -15,6 +15,28 @@
      limitations under the License.
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <!-- Proximity speaker delay entries. -->
+    <string-array name="proximity_delay_entries" translatable="false">
+        <item>100</item>
+        <item>500</item>
+        <item>1000</item>
+        <item>1500</item>
+        <item>2000</item>
+        <item>2500</item>
+        <item>3000</item>
+    </string-array>
+
+    <!-- Proximity speaker delay values. -->
+    <string-array name="proximity_delay_values" translatable="false">
+        <item>100</item>
+        <item>500</item>
+        <item>1000</item>
+        <item>1500</item>
+        <item>2000</item>
+        <item>2500</item>
+        <item>3000</item>
+    </string-array>
+
     <string-array name="forward_lookup_providers" translatable="false">
         <item>Google</item>
         <item>OpenStreetMap</item>
