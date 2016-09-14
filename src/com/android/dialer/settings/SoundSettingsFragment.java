@@ -23,7 +23,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Vibrator;
-import android.preference.CheckBoxPreference;
 import android.preference.SwitchPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -61,8 +60,8 @@ public class SoundSettingsFragment extends PreferenceFragment
             "dialer_general_incall_vibration_category_key";
 
     private Preference mRingtonePreference;
-    private CheckBoxPreference mVibrateWhenRinging;
-    private CheckBoxPreference mPlayDtmfTone;
+    private SwitchPreference mVibrateWhenRinging;
+    private SwitchPreference mPlayDtmfTone;
     private ListPreference mDtmfToneLength;
 
     private final Runnable mRingtoneLookupRunnable = new Runnable() {
@@ -97,9 +96,9 @@ public class SoundSettingsFragment extends PreferenceFragment
         Context context = getActivity();
 
         mRingtonePreference = findPreference(context.getString(R.string.ringtone_preference_key));
-        mVibrateWhenRinging = (CheckBoxPreference) findPreference(
+        mVibrateWhenRinging = (SwitchPreference) findPreference(
                 context.getString(R.string.vibrate_on_preference_key));
-        mPlayDtmfTone = (CheckBoxPreference) findPreference(
+        mPlayDtmfTone = (SwitchPreference) findPreference(
                 context.getString(R.string.play_dtmf_preference_key));
         mDtmfToneLength = (ListPreference) findPreference(
                 context.getString(R.string.dtmf_tone_length_preference_key));
