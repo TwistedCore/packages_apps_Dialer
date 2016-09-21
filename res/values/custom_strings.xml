@@ -50,4 +50,9 @@
     <string name="forward_lookup_provider_title">Forward lookup provider</string>
     <string name="people_lookup_provider_title">People lookup provider</string>
     <string name="reverse_lookup_provider_title">Reverse lookup provider</string>
+
+    <!-- speed dial -->
+    <string name="speed_dial_edit_title">Edit speed dial <xliff:g id="index" example="2">%1$d</xliff:g></string>
+    <string name="speed_dial_input_hint">Please enter a number</string>
+
 </resources>
